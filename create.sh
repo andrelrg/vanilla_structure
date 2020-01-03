@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 
 bold(){
     echo "\033[1m$1.\033[0m"
@@ -6,63 +6,98 @@ bold(){
 
 tabs(){
     for i in $@; do
-        echo "\t-$i"
+        echo "\t$i"
     done
 }
 
 help(){
     bold "Vannila Sctructure Project"
     echo "This useful tool creates the directories for your amazing project."
-    echo "To use it pass this as arguments (in that order):"
-    tabs "Language" "ProjectType"
-    echo "In this moment the supported languages are:"
+    echo "To use it, just execute the program and follow the instructions."
+    echo "At this moment the supported languages are:"
     tabs "php" "go"
     echo "And the project types are:"
     tabs "api"
     bold "Example:"
-    echo "sh create.sh php api"
+    echo "sh create.sh"
 }
 
-validate() {
-    if [[ ! "$LANGUAGE" == "" ]]; then
-        if [[ ! "$LANGUAGE" =~ ^(php|go)$ ]]; then
-            bold "Language not supported"
-            echo "The supported languages are:"
-            tabs "php" "go"
+choose() {
+    bold "Choose your language:"
+    tabs "1)php" "2)go"
+    read lang
+    if [[ ! "$lang" == "" ]]; then
+        if [[ ! "$lang" =~ ^(1|2)$ ]]; then
+            echo "Not an option."
             exit
         fi
     else
-        bold "Language argument missing, consult help for more instructions" 
-        echo "create.sh help"
+        bold "Language missing" 
+        exit
+
     fi
+
+    case "$lang" in
+        1)
+            LANGUAGE="php";;
+        2)
+            LANGUAGE="go";;
+        *)
+            exit;;
+    esac
     
-    if [[ ! "$LANGUAGE" == "" ]]; then
-        if [[ ! "$PROJECT_TYPE" =~ ^(api)$ ]]; then
-            bold "Project type not supported"
-            echo "The supported project types avaliable are:"
-            tabs "api"
+    bold "Choose your project type:"
+    tabs "1)api"
+    read ptype
+    if [[ ! "$ptype" == "" ]]; then
+        if [[ ! "$ptype" =~ ^(1|2)$ ]]; then
+            echo "Not an option."
             exit
         fi
     else
-        bold "Project type argument missing, consult help for more instructions" 
-        echo "create.sh help"
+        bold "Project type missing" 
+        exit
+
     fi
+
+    case "$ptype" in
+        1)
+            PROJECT_TYPE="api";;
+        *)
+            exit;;
+    esac
+
     # TODO implement project structure types
-    # if [[ ! "$STRUCTURE_TYPE" =~ ^(mvc)$ ]]; then
-    #     bold "Structure type not supported"
-    #     echo "The supported structure types avaliable are:"
-    #     tabs "web"
-    #     exit
-    # fi
 }
 
-LANGUAGE=$1
-PROJECT_TYPE=$2
-STRUCTURE_TYPE=$3
+phpapi(){
+    cd ..
+    mkdir -p $NAME/Src/Controllers
+    mkdir -p $NAME/Src/Services
+    mkdir -p $NAME/Src/Repositories
+    mkdir -p $NAME/Src/Components
+    mkdir -p $NAME/Settings
+    touch $NAME/Settings/config.json
+    touch $NAME/README.md
+    cd $NAME
+    cp ../vanilla_structure/php/api/index.php ./
+    cp ../vanilla_structure/php/api/composer.json ./
+    pwd
+    # TODO fix composer not found issue
+    # composer install
+    code .
+}
+
+NAME=$1
 
 if [[ "$LANGUAGE" == "help" ]]; then
     help
     exit
 fi
 
-validate
+clear
+bold "Vannila Sctructure Project"
+choose
+"$LANGUAGE$PROJECT_TYPE"
+
+

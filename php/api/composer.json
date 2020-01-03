@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "./Src",
+            "Controllers\\": "./Src/Controllers",
+            "Services\\": "./Src/Services",
+            "Repositories\\": "./Src/Repositories",
+            "Components\\": "./Src/Components",
+            "Settings\\": "./Settings",
+            "Vendor\\": "./vendor"
+        }
+    }
+}
