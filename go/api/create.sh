@@ -12,10 +12,8 @@ goapi(){
     cd $NAME
     cp ../vanilla_structure/go/api/main.go ./
     cp ../vanilla_structure/go/api/app.go ./
-    cp ../vanilla_structure/go/api/config.go ./config/
-    cp ../vanilla_structure/go/api/general.go ./common/
-    cp ../vanilla_structure/go/api/heartbeat.go ./controllers
+    cp ../vanilla_structure/go/api/config.go ./src/config/
+    cp ../vanilla_structure/go/api/general.go ./src/common/
+    cp ../vanilla_structure/go/api/heartbeat.go ./src/controllers/
     pwd
-
-    code .
 }

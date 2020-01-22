@@ -15,5 +15,4 @@ phpapi(){
     pwd
     # TODO fix composer not found issue
     # composer install
-    code .
 }
