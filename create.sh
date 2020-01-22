@@ -27,7 +27,7 @@ choose() {
     read NAME
 
     bold "Choose your language:"
-    tabs "1)php" "2)go"
+    tabs "1)Php" "2)Go"
     read lang
     if [[ ! "$lang" == "" ]]; then
         if [[ ! "$lang" =~ ^(1|2)$ ]]; then
@@ -50,7 +50,7 @@ choose() {
     esac
     
     bold "Choose your project type:"
-    tabs "1)api"
+    tabs "1)Api"
     read ptype
     if [[ ! "$ptype" == "" ]]; then
         if [[ ! "$ptype" =~ ^(1|2)$ ]]; then
@@ -70,6 +70,27 @@ choose() {
             exit;;
     esac
 
+    bold "Want a docker swarm structure to this project?"
+    tabs "1)Yes" "2)No"
+    read docker
+    if [[ ! "$ptype" == "" ]]; then
+        if [[ ! "$ptype" =~ ^(1|2)$ ]]; then
+            echo "Not an option."
+            exit
+        fi
+    else
+        bold "Docker option missing" 
+        exit
+    fi
+
+    case "$lang" in
+        1)
+            DOCKER=1;;
+        2)
+            DOCKER=0;;
+        *)
+            exit;;
+    esac
     # TODO implement project structure types
 }
 source ./php/api/create.sh

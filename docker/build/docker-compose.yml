@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+    {service_name}:
+        image: 
+        env_file: ./config/.env
+        working_dir: /go/src
+        volumes:
+            - type: bind
+              source: ./config
+              target: /go/src/config
+        deploy:
+            replicas: 1
+            update_config:
+                parallelism: 1
+                order: start-first
+        networks:
+            main:
+                aliases:
+                    - {service_name}
+networks:
+    main:
+        external: true
