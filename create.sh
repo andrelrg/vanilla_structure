@@ -1,7 +1,7 @@
 #! /bin/bash
 
 bold(){
-    echo "\033[1m$1.\033[0m"
+    echo "\033[1m$1\033[0m"
 }
 
 tabs(){
