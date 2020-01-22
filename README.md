@@ -19,3 +19,9 @@ And the project types are:
 
 ## Contribute to this Repo
 Suggestions, issues and contributions are very welcome. :)
+
+## What is missing?
+
+- Make the docker functionality change the service name and the alias name in the docker-compose.
+- Do other types of projects rather than just api.
+- Make the php run the composer creating the vendor directoty and the namespaces work.
