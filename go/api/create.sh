@@ -12,8 +12,8 @@ goapi(){
     touch $NAME/README.md
     cd $NAME
     NEWDIRECTORY=$(pwd)
-    cp ../vanilla_structure/go/api/main.go ./
-    cp ../vanilla_structure/go/api/app.go ./
+    cp ../vanilla_structure/go/api/main.go ./src/
+    cp ../vanilla_structure/go/api/app.go ./src/
     cp ../vanilla_structure/go/api/config.go ./src/config/
     cp ../vanilla_structure/go/api/general.go ./src/common/
     cp ../vanilla_structure/go/api/heartbeat.go ./src/controllers/
